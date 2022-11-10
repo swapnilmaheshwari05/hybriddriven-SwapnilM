@@ -12,7 +12,8 @@ public class TestConflictChanges {
 		System.out.println("Bye**********");
 		System.out.println("On Branch B1 line 14");
 		System.out.println("File created for checking conflict changes********");
-		System.out.println("On Branch B1 line 16");
+		System.out.println("On Branch A1 line 15 ^^^^^^^^^");
+		System.out.println("Branch A1 scenario 2");
 	}
 
 }

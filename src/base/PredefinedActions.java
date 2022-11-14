@@ -1,5 +1,7 @@
 package base;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -7,6 +9,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,6 +20,7 @@ public class  PredefinedActions {
 
 	protected static WebDriver driver;
 	static WebDriverWait wait;
+	private static Actions actions;
 	
 	protected PredefinedActions(){
 		
@@ -141,6 +145,20 @@ public class  PredefinedActions {
 		scrollToElement(e);
 		return e.isDisplayed();
 	}
+	
+	protected void mouseHoverOnElement(WebElement e) {
+		actions.moveToElement(e).build().perform();
+	}
+	
+	protected List<String> getListOfWebElementText(List<WebElement> list) {
+		List <String> listOfElementText=new ArrayList<String>();
+		for (WebElement e : list) {
+			listOfElementText.add(e.getText());
+		}
+		return listOfElementText;
+		
+	}
+	
 		
 	public String getPageTitle() {
 		return driver.getTitle();
@@ -149,6 +167,7 @@ public class  PredefinedActions {
 	public String getPageURL() {
 		return driver.getCurrentUrl();
 	}
+	
 	public static void closeBrowser() {
 		driver.close();
 	}
@@ -156,5 +175,7 @@ public class  PredefinedActions {
 	public static void closeAllBrowser() {
 		driver.quit();
 	}
+	
+	
 
 }

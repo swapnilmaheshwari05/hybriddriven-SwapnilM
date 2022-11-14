@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2022-11-14T01:26:41 IST" name="Default suite" finished-at="2022-11-14T01:27:15 IST" duration-ms="33924">
+    <groups>
+    </groups>
+    <test started-at="2022-11-14T01:26:41 IST" name="Default test" finished-at="2022-11-14T01:27:15 IST" duration-ms="33924">
+      <class name="testscripts.DashboardTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:testscripts.DashboardTest@5fd4f8f5]" started-at="2022-11-14T01:26:41 IST" name="setUp" finished-at="2022-11-14T01:27:14 IST" duration-ms="33225" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyWidgetsCountandText()[pri:0, instance:testscripts.DashboardTest@5fd4f8f5]" started-at="2022-11-14T01:27:14 IST" name="verifyWidgetsCountandText" finished-at="2022-11-14T01:27:15 IST" duration-ms="512" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyWidgetsCountandText -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:testscripts.DashboardTest@5fd4f8f5]" started-at="2022-11-14T01:27:15 IST" name="tearDown" finished-at="2022-11-14T01:27:15 IST" duration-ms="141" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- testscripts.DashboardTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

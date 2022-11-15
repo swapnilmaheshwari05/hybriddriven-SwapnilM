@@ -5,8 +5,8 @@
     <classes>
       <class name="testscripts.DashboardTest">
         <methods>
-          <include name="verifyWidgetsCountandText"/>
           <include name="setUp"/>
+          <include name="verifyProfileAboutContentTest"/>
           <include name="tearDown"/>
         </methods>
       </class> <!-- testscripts.DashboardTest -->

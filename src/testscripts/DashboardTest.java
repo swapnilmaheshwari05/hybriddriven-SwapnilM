@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import base.PredefinedActions;
 import pages.DashboardPage;
@@ -16,8 +18,9 @@ import utility.PropertyFileOperations;
 public class DashboardTest extends TestBase {
 
 	@Test
-	public void verifyWidgetsCountandText() {
+	public void verifyWidgetsCountandText() {	
 		DashboardPage dashboardPage = new DashboardPage();
+		
 		System.out.println("VERIFY-Number of widgets on dashboard page");
 		int totalWidgets = dashboardPage.getNumberOfWidgets();
 
@@ -37,6 +40,48 @@ public class DashboardTest extends TestBase {
 		System.out.println("VERIY - text of all widgets");
 		Assert.assertEquals(listOfActualWidgetsText, listOfExpectedWidgetsText);
 
+	}
+	
+	@Test
+	public void verifyProfileAboutContentTest() {
+		DashboardPage dashboardPage = new DashboardPage();
+		
+		System.out.println("STEP- Mouse hover on profile and click on Settings");
+		List<String> expectedProfileSettingOptions=new ArrayList<String>(Arrays.asList("Change Password", "About"));
+		List<String> profileSettingOptions=dashboardPage.getSettingProfileOptions();
+		
+		System.out.println("VERIFY - Available setting options");
+		Assert.assertEquals(profileSettingOptions, expectedProfileSettingOptions);
+		
+		System.out.println("STEP - Click on About link");
+		dashboardPage.clickOnProfielAbout();
+		
+		SoftAssert softAsert=new SoftAssert();
+		
+		System.out.println("VERIFY- Company name");
+		String companyName="OrangeHRM (Pvt) Ltd(Parallel Demo)";
+		softAsert.assertEquals(dashboardPage.getCompanyName() ,companyName);
+		
+		System.out.println("VERIFY- Version");
+		String version="OrangeHRM 7.7.178472";
+		softAsert.assertEquals(dashboardPage.getVersion(),version);
+		
+		System.out.println("VERIFY- Employees");
+		String employees="97 (103 more allowed)";
+		softAsert.assertEquals(dashboardPage.getEmployees() ,employees);
+		
+		System.out.println("VERIFY- Users");
+		String users="83 (417 more allowed)";
+		softAsert.assertEquals(dashboardPage.getUsers() ,users);
+		
+		System.out.println("VERIFY- Renewal On");
+		String renewalOn="Fri, 30 Dec 2022";
+		softAsert.assertEquals(dashboardPage.getRenewalOn(),renewalOn);
+		
+		System.out.println("STEP - Click on Ok button");
+		dashboardPage.clickOnAboutPopupBtn("Ok");
+		
+		softAsert.assertAll();
 	}
 
 }

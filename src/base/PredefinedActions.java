@@ -34,6 +34,7 @@ public class  PredefinedActions {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		wait=new WebDriverWait(driver,60);
+		actions = new Actions(driver);
 	}
 	
 	protected WebElement getElement (String locatorType, String locatorValue,boolean isWaitRequired) {
@@ -156,10 +157,17 @@ public class  PredefinedActions {
 			listOfElementText.add(e.getText());
 		}
 		return listOfElementText;
-		
 	}
 	
-		
+	protected boolean waitForVisibilityOfElement(WebElement e) {
+		try {
+			wait.until(ExpectedConditions.visibilityOf(e));
+		}
+		catch(Exception exception) {
+			return false;
+		}
+		return true;
+	}
 	public String getPageTitle() {
 		return driver.getTitle();
 	}

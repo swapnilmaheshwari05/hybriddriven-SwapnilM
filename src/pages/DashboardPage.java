@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,11 +26,14 @@ public class DashboardPage extends PredefinedActions {
 	@FindBy(xpath = "//div[@class='sub-menu-container-php profile-context-menu-handler opened']//div//div")
 	private List<WebElement> profileOptions;
 
-	@FindBy(css = "a.password-action.profile-context-menu-handler")
+	@FindBy(css = "a[class*='xt-menu-handler']")
 	private WebElement profileSetting;
 
 	@FindBy(css = "div#companyInfo p")
 	private List<WebElement> profileAboutDetails;
+	
+	@FindBy(css="div#companyInfo>div>div:nth-child(1)>p")
+	private WebElement aboutConentFirstP;
 
 	private String aboutBtnLocator = "//a[text()='%s']";
 
@@ -68,6 +72,10 @@ public class DashboardPage extends PredefinedActions {
 	}
 
 	public Map<String, String> getAboutText() {
+		boolean flag=waitForVisibilityOfElement(aboutConentFirstP);
+		if(!flag)
+			throw new NoSuchElementException("About content not being loaded in given time out");
+		
 		List<String> aboutDetailsList = getListOfWebElementText(profileAboutDetails);
 		Map<String, String> aboutDetailsMap = new LinkedHashMap<>();
 
@@ -77,7 +85,26 @@ public class DashboardPage extends PredefinedActions {
 		}
 		return aboutDetailsMap;
 	}
+	
+	public String getCompanyName() {
+		return getAboutText().get("Company Name");
+	}
+	
+	public String getVersion() {
+		return getAboutText().get("Version");
+	}
+	
+	public String getEmployees() {
+		return getAboutText().get("Employees");
+	}
+	
+	public String getUsers() {
+		return getAboutText().get("Users");
+	}
 
+	public String getRenewalOn() {
+		return getAboutText().get("Renewal on");
+	}
 	public void clickOnAboutPopupBtn(String btnName) {
 		String locatorValue = String.format(aboutBtnLocator, btnName);
 		WebElement e = getElement("xpath", locatorValue, false);

@@ -168,6 +168,16 @@ public class  PredefinedActions {
 		}
 		return true;
 	}
+	
+	protected String getElementText(WebElement e , boolean isWaitRequired) {
+		if(isWaitRequired)
+			waitForVisibilityOfElement(e);
+		String value=e.getText();
+		if(value.equals(value)) {
+			value=e.getAttribute("value");
+		}
+		return value;
+	}
 	public String getPageTitle() {
 		return driver.getTitle();
 	}

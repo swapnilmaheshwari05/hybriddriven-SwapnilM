@@ -36,6 +36,9 @@ public class DashboardPage extends PredefinedActions {
 	private WebElement aboutConentFirstP;
 
 	private String aboutBtnLocator = "//a[text()='%s']";
+	
+	private String menuLocator = "//a[contains (text(), '%s')]";
+	
 
 	public DashboardPage() {
 		PageFactory.initElements(driver, this);
@@ -105,10 +108,31 @@ public class DashboardPage extends PredefinedActions {
 	public String getRenewalOn() {
 		return getAboutText().get("Renewal on");
 	}
+	
 	public void clickOnAboutPopupBtn(String btnName) {
 		String locatorValue = String.format(aboutBtnLocator, btnName);
 		WebElement e = getElement("xpath", locatorValue, false);
 		clickOnElement(e, false);
+	}
+	
+	enum Menu{
+		EMPLOYEELIST("Employee List"),
+		MYINFO("My Info"),
+		DIRECTORY("Directory"),
+		BUZZ("Buzz"),
+		ANNOUNCEMENTS("Announcements"),
+		ORGANIZATIONCHART("Organization Chart"),
+		DASHBOARD("Dashboard");
+		
+		public String menuItem;
+		private Menu(String menuTitle) {
+			this.menuItem=menuTitle;
+		}
+	}
+	public void gotoMenu(Menu menuName) {
+			String menuText=menuName.menuItem;
+			String locatorValue=String.format(menuLocator, menuText);
+			clickOnElement(getElement("xpath", locatorValue, true),false);
 	}
 
 }

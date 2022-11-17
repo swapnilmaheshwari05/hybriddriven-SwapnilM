@@ -1,11 +1,16 @@
 package base;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -35,6 +40,18 @@ public class  PredefinedActions {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		wait=new WebDriverWait(driver,60);
 		actions = new Actions(driver);
+	}
+	
+	public static WebDriver startTemp(String url) {
+		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver_106.exe");
+		System.out.println("STEp - Launch chrome browser");
+		driver = new ChromeDriver();
+		driver.get(url);
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		wait=new WebDriverWait(driver,60);
+		actions = new Actions(driver);
+		return driver;
 	}
 	
 	protected WebElement getElement (String locatorType, String locatorValue,boolean isWaitRequired) {
@@ -178,6 +195,17 @@ public class  PredefinedActions {
 		}
 		return value;
 	}
+	
+	public  static void takeScreenShot(String testCaseName) {
+		TakesScreenshot ts= (TakesScreenshot) driver;
+		File srcFile=ts.getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(srcFile, new File("./failedTestCases/"+testCaseName+".jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public String getPageTitle() {
 		return driver.getTitle();
 	}

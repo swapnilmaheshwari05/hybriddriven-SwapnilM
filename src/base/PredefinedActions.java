@@ -196,6 +196,22 @@ public class  PredefinedActions {
 		return value;
 	}
 	
+	protected void clickUsingJS(WebElement ele) {
+		JavascriptExecutor js =(JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click", ele);
+	}
+	
+	protected void sendKeysUsingJS(WebElement ele, String text) {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("arguments[0].value='"+ text +"'", ele);
+	}
+	
+	protected void markCheckboxUsingJS(WebElement ele, boolean checkedOrUnchecked) {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("arguments[0].checked=" +checkedOrUnchecked+"",ele);
+	}
+	
+	
 	public  static void takeScreenShot(String testCaseName) {
 		TakesScreenshot ts= (TakesScreenshot) driver;
 		File srcFile=ts.getScreenshotAs(OutputType.FILE);
